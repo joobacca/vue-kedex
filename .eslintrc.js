@@ -7,6 +7,8 @@ module.exports = {
     'plugin:vue/vue3-essential',
     '@vue/airbnb',
     '@vue/typescript/recommended',
+    'prettier',
+    'prettier/vue',
   ],
   parserOptions: {
     ecmaVersion: 2020,
