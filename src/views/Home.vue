@@ -1,13 +1,22 @@
 <template>
   <div class="home">
-    <img alt="Vue-kedex logo" src="http://via.placeholder.com/400x400" />
-    <Pokedex msg="Welcome to Your Vue.js + TypeScript App" />
+    <img src="http://via.placeholder.com/400x400" />
+    <Suspend>
+      <template #default>
+        <Pokedex />
+      </template>
+      <template #fallback>
+        <div>Loading awesome pokemon ...</div>
+      </template>
+    </Suspend>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Pokedex from '@/components/Pokedex.vue'; // @ is an alias to /src
+
+type ErrorCapturedHook = (err: Error, info: string) => boolean | void;
 
 export default defineComponent({
   name: 'Home',

@@ -1,28 +1,27 @@
 <template>
-  <!-- <div v-if="loading" class="loading">loading lol</div> -->
-  <div class="pokemon" v-if="!error && pokemon">
-    {{ pokemon.name }}
-    <img :src="pokemon.sprites.other['official-artwork'].front_default" class="main-sprite" />
-  </div>
+  <PokemonDetails :pokemonId="pokemonId" />
 </template>
 
 <script lang="ts">
 import { useRoute } from 'vue-router';
-import usePokemon from '@/use/usePokemon.ts';
+import { defineComponent } from 'vue';
+import PokemonDetails from '@/components/PokemonDetails.vue';
 
-export default {
+export default defineComponent({
   name: 'Pokemon',
+  components: {
+    PokemonDetails,
+  },
   setup() {
     const route = useRoute();
     const { pokemonId } = route.params;
+    const id = Array.isArray(pokemonId) ? pokemonId[0] : pokemonId;
 
     return {
-      ...usePokemon(
-        parseInt(Array.isArray(pokemonId) ? pokemonId[0] : pokemonId, 10),
-      ),
+      pokemonId: id,
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

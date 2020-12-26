@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Pokemon from '@/views/Pokemon.vue';
+import PokemonView from '@/views/PokemonView.vue';
 import Home from '@/views/Home.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -10,8 +10,16 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/pokemon/:pokemonId',
-    name: 'Pokemon',
-    component: Pokemon,
+    name: 'PokemonView',
+    component: PokemonView,
+    props: (route) => {
+      const id = route.params.pokemonId;
+      const pokemonId = Number.parseInt(Array.isArray(id) ? id[0] : id, 10);
+      if (Number.isNaN(pokemonId)) {
+        return 0;
+      }
+      return { pokemonId };
+    },
   },
   {
     path: '/about',

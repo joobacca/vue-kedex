@@ -3,7 +3,9 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div>
-  <router-view />
+  <div id="wrapper">
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
@@ -13,6 +15,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#wrapper {
+  padding: 0 5% 50px 5%;
 }
 
 #nav {

@@ -1,20 +1,25 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ state.title }}</h1>
-    <div v-if="state.data.length > 0" class="vuekedex-grid">
-      <router-link
-        v-for="pokemon in state.data"
+    <div v-if="state.data.length > 0" class="p-grid">
+      <div
+        class="p-col-6 p-md-4 p-lg-3 p-xl-2"
+        v-for="(pokemon, index) in state.data"
         :key="pokemon.name"
-        :to="{ name: 'Pokemon', params: { pokemonName: pokemon.name } }"
-        >{{ pokemon.name }}</router-link
       >
+        <router-link
+          :to="{ name: 'PokemonView', params: { pokemonId: index + 1 } }"
+          class=""
+          >{{ capitalize(pokemon.name) }}</router-link
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { reactive, defineComponent, onMounted } from 'vue';
-import constants from '@/constants.ts';
+import constants from '@/constants';
 
 const { POKE_API } = constants;
 
@@ -29,7 +34,14 @@ export default defineComponent({
       prevUrl: '',
     });
 
-    const fetchPokemon = (url = `${POKE_API}pokemon/`, limit = 20, offset = 0) => {
+    const capitalize = ([first, ...rest]: Array<string>) =>
+      first.toUpperCase() + rest.join('');
+
+    const fetchPokemon = (
+      url = `${POKE_API}pokemon/`,
+      limit = 20,
+      offset = 0,
+    ) => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -41,25 +53,11 @@ export default defineComponent({
       fetchPokemon();
     });
 
-    return { state };
+    return { state, capitalize };
   },
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
