@@ -3,11 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    '@vue/airbnb',
-    '@vue/typescript/recommended',
-    'plugin:vue/vue3-recommended',
-  ],
+  extends: ['@vue/airbnb', '@vue/typescript/recommended', 'plugin:vue/vue3-recommended'],
   parserOptions: {
     ecmaVersion: 2020,
   },

@@ -4,7 +4,10 @@
     :class="$props.class"
     :viewBox="`0 0 ${width} ${height}`"
   >
-    <path fill="currentColor" :d="svgPath" />
+    <path
+      fill="currentColor"
+      :d="svgPath"
+    />
   </svg>
 </template>
 
@@ -25,16 +28,17 @@ export default defineComponent({
       default: 'fas',
       required: false,
     },
-    class: String,
+    class: {
+      type: String,
+      default: '',
+    },
   },
 
   setup(props) {
-    const definition = computed(() =>
-      findIconDefinition({
-        prefix: props.type,
-        iconName: props.icon,
-      }),
-    );
+    const definition = computed(() => findIconDefinition({
+      prefix: props.type,
+      iconName: props.icon,
+    }));
 
     const width = computed(() => definition.value.icon[0]);
     const height = computed(() => definition.value.icon[1]);

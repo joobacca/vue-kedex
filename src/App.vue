@@ -18,7 +18,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Socials from '@/components/Socials.vue';
-import logo from '@/assets/logo.svg';
 
 export default defineComponent({
   name: 'App',
@@ -27,7 +26,6 @@ export default defineComponent({
   },
   setup() {
     return {
-      logo,
       items: [
         {
           label: 'Home',
