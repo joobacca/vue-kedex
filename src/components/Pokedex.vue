@@ -1,18 +1,22 @@
 <template>
   <div>
     <h1>Vue-kedex</h1>
-    <div v-if="allPokemon && allPokemon.length > 0" class="p-grid">
+    <div
+      v-if="allPokemon && allPokemon.length > 0"
+      class="p-grid"
+    >
       <Card
-        class="p-col-6 p-md-4 p-lg-3 p-xl-2"
         v-for="(pokemon, index) in allPokemon"
         :key="pokemon.name"
+        class="p-col-6 p-md-4 p-lg-3 p-xl-2"
       >
         <template #content>
           <router-link
             :to="{ name: 'PokemonView', params: { pokemonId: index + 1 + offset } }"
             class="pokemon-link"
-            >{{ capitalize(pokemon.name) }}</router-link
           >
+            {{ capitalize(pokemon.name) }}
+          </router-link>
         </template>
       </Card>
     </div>
@@ -29,7 +33,9 @@ export default defineComponent({
   setup() {
     const { allPokemon, error } = useAllPokemon();
     const offset = 0;
-    return { capitalize, allPokemon, error, offset };
+    return {
+      capitalize, allPokemon, error, offset,
+    };
   },
 });
 </script>

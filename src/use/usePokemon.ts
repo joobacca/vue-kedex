@@ -1,19 +1,19 @@
-import { reactive, toRefs } from "vue";
-import constants from "@/constants";
+import { reactive, toRefs } from 'vue';
+import constants from '@/constants';
 
 const { POKE_API } = constants;
 
 function usePokemon(pokemonId: number) {
   const state = reactive({
     pokemon: null,
-    error: null
+    error: null,
   });
   fetch(`${POKE_API}pokemon/${pokemonId}`)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       state.pokemon = data;
     })
-    .catch(err => {
+    .catch((err) => {
       state.error = err;
     });
   return toRefs(state);

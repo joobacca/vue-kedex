@@ -1,16 +1,21 @@
 <template>
-  <Menubar id="nav" :model="items">
+  <Menubar
+    id="nav"
+    :model="items"
+  >
     <template #start>
-      <div><img :src="'./assets/logo.svg'" /></div>
+      <div><img :src="'./assets/logo.svg'"></div>
     </template>
-    <template #end><Socials /></template>
+    <template #end>
+      <Socials />
+    </template>
   </Menubar>
   <div id="wrapper">
     <router-view />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import Socials from '@/components/Socials.vue';
 import logo from '@/assets/logo.svg';
