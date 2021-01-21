@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.svg" />
+    <img src="../assets/logo.svg">
     <Suspense>
       <template #default>
         <Pokedex />

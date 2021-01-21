@@ -1,7 +1,7 @@
 <template>
   <Suspense>
     <template #default>
-      <PokemonDetails :pokemonId="pokemonId" />
+      <PokemonDetails :pokemon-id="pokemonId" />
     </template>
   </Suspense>
 </template>
@@ -19,7 +19,7 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const { pokemonId } = route.params;
-    const id = Array.isArray(pokemonId) ? pokemonId[0] : pokemonId;
+    const id: number = parseInt(Array.isArray(pokemonId) ? pokemonId[0] : pokemonId, 10);
 
     return {
       pokemonId: id,
