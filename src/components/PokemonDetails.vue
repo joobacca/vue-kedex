@@ -1,16 +1,19 @@
 <template>
-  <div class="pokemon" v-if="!error && pokemon">
+  <div
+    v-if="pokemon"
+    class="pokemon"
+  >
     <img
       :src="pokemon.sprites.other['official-artwork'].front_default"
       class="main-sprite"
-    />
+    >
     {{ pokemon.name }}
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-import usePokemon from '@/use/usePokemon';
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'PokemonDetails',
@@ -21,10 +24,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { pokemon, error } = usePokemon(props.pokemonId);
+    const store = useStore();
     return {
-      pokemon,
-      error,
+      pokemon: computed(() => store.getters.getSinglePokemon(props.pokemonId)),
     };
   },
 });

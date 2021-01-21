@@ -6,13 +6,16 @@
       class="p-grid"
     >
       <Card
-        v-for="(pokemon, index) in allPokemon"
+        v-for="(pokemon) in allPokemon"
         :key="pokemon.name"
         class="p-col-6 p-md-4 p-lg-3 p-xl-2"
       >
         <template #content>
           <router-link
-            :to="{ name: 'PokemonView', params: { pokemonId: index + 1 + offset } }"
+            :to="{
+              name: 'PokemonView',
+              params: { pokemonId: pokemon.id },
+            }"
             class="pokemon-link"
           >
             {{ capitalize(pokemon.name) }}
@@ -24,17 +27,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
+import { useStore } from 'vuex';
 import { capitalize } from '@/utils/helperFunctions';
-import useAllPokemon from '@/use/useAllPokemon';
 
 export default defineComponent({
   name: 'Pokedex',
   setup() {
-    const { allPokemon, error } = useAllPokemon();
+    const store = useStore();
+
+    store.dispatch('loadInitialPokemon');
+
     const offset = 0;
     return {
-      capitalize, allPokemon, error, offset,
+      capitalize,
+      // allPokemon,
+      offset,
+      allPokemon: store.state.pokemon,
     };
   },
 });
